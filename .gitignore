@@ -1,0 +1,15 @@
+# Xcode
+*.xcuserdata
+*.xcconfig
+!Configuration/Example.xcconfig
+build/
+*.xcarchive
+*.ipa
+DerivedData/
+
+# XcodeGen generated
+*.xcodeproj
+*.xcworkspace
+
+# macOS
+.DS_Store
