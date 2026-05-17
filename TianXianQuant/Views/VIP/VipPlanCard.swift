@@ -88,7 +88,7 @@ struct VipPlanCard: View {
     }
 
     private func planRow(_ plan: VipPlan) -> some View {
-        let isSelected = selectedPlan.id == plan.id
+        let isSelected = selectedPlan.map { $0.id == plan.id } ?? false
         return HStack {
             ZStack {
                 Circle()

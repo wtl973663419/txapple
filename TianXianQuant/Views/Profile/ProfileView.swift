@@ -123,7 +123,7 @@ struct ProfileView: View {
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 4)
-        .background(Capsule().fill(.vipGold.opacity(0.12)))
+        .background(Capsule().fill(Color.vipGold.opacity(0.12)))
     }
 
     private var bioSection: some View {
