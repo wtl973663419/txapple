@@ -24,32 +24,30 @@ jobs:
       - name: Generate Xcode project
         run: xcodegen generate
 
-      - name: Build archive (unsigned)
+      - name: Build app (unsigned)
         run: |
-          xcodebuild archive \
+          xcodebuild build \
             -project TianXianQuant.xcodeproj \
             -scheme TianXianQuant \
-            -archivePath ./build/TianXianQuant.xcarchive \
             -configuration Release \
             -sdk iphoneos \
+            -derivedDataPath ./DerivedData \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO \
             ONLY_ACTIVE_ARCH=NO
 
-      - name: Export unsigned IPA
+      - name: Package unsigned IPA
         run: |
-          mkdir -p ./build/ipa
-          xcodebuild -exportArchive \
-            -archivePath ./build/TianXianQuant.xcarchive \
-            -exportPath ./build/ipa \
-            -exportOptionsPlist ExportOptions.plist \
-            CODE_SIGN_IDENTITY="" \
-            CODE_SIGNING_ALLOWED=NO
+          APP_PATH=$(find ./DerivedData/Build/Products/Release-iphoneos -name "*.app" -type d | head -1)
+          echo "Found app at: $APP_PATH"
+          mkdir -p ./build/Payload
+          cp -r "$APP_PATH" ./build/Payload/
+          cd ./build && zip -r TianXianQuant.ipa Payload/
 
       - name: Upload IPA artifact
         uses: actions/upload-artifact@v4
         with:
           name: TianXianQuant.ipa
-          path: ./build/ipa/TianXianQuant.ipa
+          path: ./build/TianXianQuant.ipa
           retention-days: 7
