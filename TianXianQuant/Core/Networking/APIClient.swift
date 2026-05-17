@@ -12,7 +12,7 @@ final class APIClient: @unchecked Sendable {
 
     private init() {
         let config = URLSessionConfiguration.default
-        config.timeoutIntervalForConnect = APIConfig.connectTimeout
+        config.timeoutIntervalForRequest = APIConfig.connectTimeout
         config.timeoutIntervalForResource = APIConfig.readTimeout
         config.httpAdditionalHeaders = [
             "Content-Type": "application/json",

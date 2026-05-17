@@ -73,12 +73,12 @@ final class UpdateChecker {
         )
 
         alert.addAction(UIAlertAction(title: "立即更新", style: .default) { _ in
-            openAppStore()
+            self.openAppStore()
         })
 
         if !info.forceUpdate {
             alert.addAction(UIAlertAction(title: "稍后再说", style: .cancel) { _ in
-                skipVersion(info.versionCode)
+                self.skipVersion(info.versionCode)
             })
         }
 

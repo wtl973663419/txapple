@@ -406,7 +406,7 @@ final class BaZiCalculator {
         var text = "═══════════════════════\n"
         text += "    【性格分析】\n"
         text += "═══════════════════════\n\n"
-        text += "日主\(dayMaster)(\(elem))：
+        text += "日主\(dayMaster)(\(elem))："
 
         switch elem {
         case "木":

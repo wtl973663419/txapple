@@ -124,3 +124,9 @@ extension Double {
         String(format: "%.2f亿", self / 1_0000_0000)
     }
 }
+
+extension Int64 {
+    var volumeString: String {
+        Double(self).volumeString
+    }
+}

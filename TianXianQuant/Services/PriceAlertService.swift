@@ -105,10 +105,12 @@ final class PriceAlertService: @unchecked Sendable {
 
             guard response.success, let quotes = response.data else { return }
 
-            let priceMap = Dictionary(uniqueKeysWithValues: quotes.compactMap { quote in
-                guard let code = quote.code, let price = quote.price else { return nil }
-                return (code, price)
-            })
+            var priceMap = [String: Double]()
+            for quote in quotes {
+                if let code = quote.code, let price = quote.price {
+                    priceMap[code] = price
+                }
+            }
 
             let triggered = UserDefaultsManager.shared.triggeredAlerts
             let today = dateString()
